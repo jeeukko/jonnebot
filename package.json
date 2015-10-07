@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://jeeukko.kapsi.fi/git/jonnebot.git"
+    "url": "https://github.com/jeeukko/jonnebot"
   },
   "author": "Juho Häkkinen <juho@juhohakkinen.fi>",
   "license": "MIT",
