@@ -10,6 +10,8 @@ var bot = new irc.Client(config.server, config.botname, {
 });
 
 var botti = {
+	nick: bot.opt.nick,
+	
 	send: function() {
 		bot.send.apply(bot, Array.prototype.slice.call(arguments, 0));
 	},

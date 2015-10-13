@@ -1,6 +1,9 @@
 # JonneBot
-Simple IRC-bot for my private channel
+Simple IRC-bot framework
 ## Features
-None yet
+* Plugin based system (see plugins dir)
+* Userdatabase (!login & !logout)
+* More to come
 ## Todo
-Lot of things
+* This Todo
+* Documentation & examples
