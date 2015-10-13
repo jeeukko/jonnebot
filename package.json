@@ -1,6 +1,6 @@
 {
   "name": "jonnebot",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Simple IRC-bot",
   "main": "index.js",
   "repository": {
