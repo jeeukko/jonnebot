@@ -11,7 +11,7 @@ var bot = new irc.Client(config.server, config.botname, {
 
 var botti = {
 	nick: bot.opt.nick,
-	
+
 	send: function() {
 		bot.send.apply(bot, Array.prototype.slice.call(arguments, 0));
 	},
@@ -38,10 +38,10 @@ seneca.ready(function(err) {
 		console.log(err);
 		process.exit(1);
 	}
-	
+
 	bot.addListener("error", function(message) {
 		console.log(message);
-	});	
+	});
 	bot.addListener("names", function(channel, nicks) {
 		seneca.act({event: "names", arg: {channel: channel, nicks: nicks}});
 	});
@@ -73,6 +73,6 @@ seneca.ready(function(err) {
 		seneca.act({event: "-mode", arg: {channel: channel, by: by, mode: mode, argument: argument}});
 	});
 	bot.addListener("action", function(from, to, text) {
-		seneca.act({event: "mode+", arg: {from: from, to: to, text: text}});
+		seneca.act({event: "action", arg: {from: from, to: to, text: text}});
 	});
 });
