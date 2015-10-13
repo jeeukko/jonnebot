@@ -4,5 +4,5 @@
 	"realname": "IRC-bot",
 	"server": "irc.quakenet.org",
 	"channels": ["#JHtesti"],
-	"plugins": ["user"]
+	"plugins": ["basic", "user"]
 }
