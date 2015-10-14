@@ -11,7 +11,7 @@ Simple IRC-bot framework
 * Documentation & examples
 
 ## Plugins
-* Basic
+* Basic (this MUST be enabled)
 
 Handles `!restart` command
 * User
