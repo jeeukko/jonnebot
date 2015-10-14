@@ -12,10 +12,13 @@ Simple IRC-bot framework
 
 ## Plugins
 * Basic
+
 Handles `!restart` command
 * User
+
 Basic user database & auto OP
 * Reddit link poster
+
 Post every link to reddit
 
 ## Installing
