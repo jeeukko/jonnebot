@@ -4,7 +4,7 @@ var uri = require("urijs");
 
 module.exports = function(bot) {
 	var reddit = new snoocore({
-		userAgent: "nodejs:jonnebot:v1.0.1 (by /u/jeeuggo)",
+		userAgent: config.useragent,
 		oauth: {
 			type: "script",
 			key: config.key,
