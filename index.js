@@ -30,7 +30,7 @@ var botti = {
 }
 
 config.plugins.forEach(function(item) {
-	seneca.use(require("./plugins/" + item + ".js"), botti);
+	seneca.use(require("./plugins/" + item + "/index.js"), botti);
 });
 
 seneca.ready(function(err) {
