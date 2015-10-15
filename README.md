@@ -2,7 +2,7 @@
 Simple IRC-bot framework
 
 ## Features
-* Plugin based system (see plugins dir)
+* Plugin based system (see wiki)
 * Users database
 * More to come
 
@@ -10,16 +10,10 @@ Simple IRC-bot framework
 * This Todo
 * Documentation & examples
 
-## Plugins
+## Plugins (see the wiki)
 * Basic (this MUST be enabled)
-
-Handles `!restart` command
 * User
-
-Basic user database & auto OP
 * Reddit link poster
-
-Post every link to reddit
 
 ## Installing
 1. `git clone https://github.com/jeeukko/jonnebot`
