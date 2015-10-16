@@ -10,11 +10,11 @@
   "author": "Juho Häkkinen <juho@juhohakkinen.fi>",
   "license": "MIT",
   "dependencies": {
-    "irc": "~0.4.0",
-    "seneca": "~0.7.1",
-    "sqlite3": "~3.1.0",
-    "snoocore": "~3.2.0",
-    "urijs": "~1.16.1",
-    "mailchimp": "~1.1.0"
+    "irc": "*",
+    "seneca": "*",
+    "sqlite3": "*",
+    "snoocore": "*",
+    "urijs": "*",
+    "mailchimp": "*"
   }
 }
