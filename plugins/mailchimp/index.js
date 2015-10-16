@@ -1,5 +1,5 @@
 var config = require("./config.json");
-var mailchimp = require("mailchimp");
+var MailChimpWebhook = require("mailchimp").MailChimpWebhook;
 
 module.exports = function(bot) {
 	var webhook = new MailChimpWebhook({
