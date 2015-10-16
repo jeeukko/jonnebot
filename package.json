@@ -10,7 +10,7 @@
   "author": "Juho Häkkinen <juho@juhohakkinen.fi>",
   "license": "MIT",
   "dependencies": {
-    "irc": "*",
+    "irc": "git://github.com/martynsmith/node-irc",
     "seneca": "*",
     "sqlite3": "*",
     "snoocore": "*",
