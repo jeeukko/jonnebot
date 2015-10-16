@@ -3,6 +3,6 @@
 	"username": "",
 	"realname": "",
 	"server": "",
-	"channels": [""],
+	"channel": "",
 	"plugins": ["basic"]
 }

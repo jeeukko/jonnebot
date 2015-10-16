@@ -8,7 +8,7 @@ module.exports = function(bot) {
 	});
 
 	webhook.on("subscribe", function (data, meta) {
-		bot.say(config.channel, "New subscriber joined to the mailing list!");
+		bot.say(bot.config.channel, "New subscriber joined to the mailing list!");
 	});
 
 	webhook.on("error", function(error) {

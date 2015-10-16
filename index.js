@@ -3,7 +3,7 @@ var seneca = require("seneca")();
 var irc = require("irc");
 
 var bot = new irc.Client(config.server, config.botname, {
-	channels: config.channels,
+	channels: [config.channel],
 	userName: config.username,
 	realName: config.realname,
 	debug: true
@@ -11,6 +11,8 @@ var bot = new irc.Client(config.server, config.botname, {
 
 var botti = {
 	nick: bot.opt.nick,
+
+	config: config,
 
 	send: function() {
 		bot.send.apply(bot, Array.prototype.slice.call(arguments, 0));
