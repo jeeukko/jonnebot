@@ -1,5 +1,5 @@
-var sqlite3 = require("sqlite3");
 var crypto = require("crypto");
+var fs = require("fs");
 
 module.exports = function(bot) {
 	this.add("event:join", function(msg, cb) {
@@ -10,66 +10,68 @@ module.exports = function(bot) {
 	});
 
 	this.add("event:pm", function(msg, cb) {
-		var db = new sqlite3.Database("jonnebot.db");
-
 		if (msg.arg.text.indexOf("!login") > -1) {
+			var users = JSON.parse(fs.readFileSync("users.json"));
 			var username = msg.arg.nick;
 			var password = crypto.createHash("sha512").update(msg.arg.text.split(" ")[1]).digest("hex");
 
-			db.all("SELECT * FROM users WHERE username = ? AND password = ?", username, password, function(err, rows) {
-				if (rows[0] && rows[0].logged == 0) {
-					db.run("UPDATE users SET logged = 1 WHERE username = ?", username);
-					bot.say(msg.arg.nick, "You have logged in!");
+			if (users[username] && users[username].password == password) {
+				if (users[username].logged == 0) {
+					users[username].logged = 1;
+					fs.writeFileSync("./users.json", JSON.stringify(users, null, 4));
 
-					if (rows[0].level >= 9) {
-						bot.send("mode", msg.arg.to, "+o", msg.arg.nick);
+					if (users[username].level >= 8) {
+						bot.send("mode", bot.config.channel, "+o", msg.arg.nick);
 					}
+
+					bot.say(msg.arg.nick, "You have logged in!");
 				} else {
 					bot.say(msg.arg.nick, "You have already logged in!");
 				}
-			});
+			} else {
+				bot.say(msg.arg.nick, "Wrong username or password!");
+			}
 		} else if (msg.arg.text.indexOf("!logout") > -1) {
+			var users = JSON.parse(fs.readFileSync("users.json"));
 			var username = msg.arg.nick;
 
-			db.all("SELECT * FROM users WHERE username = ?", username, function(err, rows) {
-				if (rows[0] && rows[0].logged == 1) {
-					db.run("UPDATE users SET logged = 0 WHERE username = ?", username);
-					bot.say(msg.arg.nick, "You have logged out!");
-				} else {
-					bot.say(msg.arg.nick, "You have not logged in!");
-				}
-			});
-		}
+			if (users[username] && users[username].logged == 1) {
+				users[username].logged = 0;
+				fs.writeFileSync("./users.json", JSON.stringify(users, null, 4));
 
-		db.close();
+				if (users[username].level >= 8) {
+					bot.send("mode", bot.config.channel, "-o", msg.arg.nick);
+				}
+
+				bot.say(msg.arg.nick, "You have logged out!");
+			} else {
+				bot.say(msg.arg.nick, "You haven't logged in!");
+			}
+		}
 		cb();
 	});
 
 	this.add("event:part", function(msg, cb) {
-		var db = new sqlite3.Database("jonnebot.db");
+		var users = JSON.parse(fs.readFileSync("users.json"));
 		var username = msg.arg.nick;
 
-		db.all("SELECT * FROM users WHERE username = ?", username, function(err, rows) {
-			if (rows[0] && rows[0].logged == 1) {
-				db.run("UPDATE users SET logged = 0 WHERE username = ?", username);
-			}
-		});
+		if (users[username] && users[username].logged == 1) {
+			users[username].logged = 0;
+			fs.writeFileSync("./users.json", JSON.stringify(users, null, 4));
+		}
 
-		db.close();
 		cb();
 	});
 
 	this.add("event:quit", function(msg, cb) {
-		var db = new sqlite3.Database("jonnebot.db");
+		var users = JSON.parse(fs.readFileSync("users.json"));
 		var username = msg.arg.nick;
 
-		db.all("SELECT * FROM users WHERE username = ?", username, function(err, rows) {
-			if (rows[0] && rows[0].logged == 1) {
-				db.run("UPDATE users SET logged = 0 WHERE username = ?", username);
-			}
-		});
+		if (users[username] && users[username].logged == 1) {
+			users[username].logged = 0;
+			fs.writeFileSync("./users.json", JSON.stringify(users, null, 4));
+		}
 
-		db.close();
 		cb();
 	});
 }
