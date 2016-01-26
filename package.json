@@ -8,7 +8,7 @@
     "url": "https://github.com/jeeukko/jonnebot"
   },
   "author": "Juho Häkkinen <juho@juhohakkinen.fi>",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "dependencies": {
     "irc": "*",
     "seneca": "*",
