@@ -4,11 +4,8 @@ var parser = require("rss-parser");
 
 module.exports = function(bot) {
 	setTimeout(function() {
-		//console.log("timeout");
 		setInterval(function() {
-			//console.log("interval");
 			parser.parseURL(config.url, function(err, parsed) {
-				//console.log("parser", err, parsed);
 				if (err) {
 					console.log("ERROR: " + err);
 				} else {
@@ -26,6 +23,4 @@ module.exports = function(bot) {
 			});
 		}, config.interval * 1000);
 	}, 10000);
-
-	//bot.say(bot.config.channel, config.messages[get.type]);
 }
