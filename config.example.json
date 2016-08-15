@@ -1,0 +1,9 @@
+{
+	"botname": "JonneBot",
+	"username": "JonneBot",
+	"realname": "JonneBot",
+	"server": "irc.quakenet.org",
+	"channel": "#testing",
+	"plugins": ["chat", "linkcheck", "rss"],
+	"debug": false
+}

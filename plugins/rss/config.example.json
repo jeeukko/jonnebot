@@ -1,0 +1,13 @@
+{
+    "urls": [
+        {
+            "url": "http://www.hs.fi/rss/?osastot=kotimaa",
+            "lastPostTime": 0
+        },
+		{
+            "url": "http://www.hs.fi/rss/?osastot=ulkomaat",
+            "lastPostTime": 0
+        }
+    ],
+    "interval": 10
+}
