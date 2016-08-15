@@ -16,7 +16,7 @@ Simple IRC-bot framework
 * Reddit link poster
 
 ## Installing
-1. `git clone https://github.com/jeeukko/jonnebot`
+1. `git clone https://github.com/jeeukko/jonnebot && cd jonnebot`
 2. `npm install`
 3. Rename `users-template.json` to `users.json` and add users (passwords are SHA512 hashed (lowercase WITHOUT `:`s))
 4. Rename `config-template.json` to `config.json` and edit to wanted
