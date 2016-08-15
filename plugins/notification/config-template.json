@@ -2,6 +2,6 @@
 	"port": "",
 	"secret": "",
 	"messages": {
-		"": ""
+		"key": "message"
 	}
 }

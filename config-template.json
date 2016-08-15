@@ -4,5 +4,6 @@
 	"realname": "",
 	"server": "",
 	"channel": "",
-	"plugins": ["basic"]
+	"plugins": [],
+	"debug": false
 }

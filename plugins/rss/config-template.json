@@ -1,5 +1,9 @@
 {
-	"url": "http://example.com/feed",
-	"interval": 10,
-	"lastPostTime": 0
+    "urls": [
+        {
+            "url": "http://example.com/feed.xml.xml",
+            "lastPostTime": 0
+        }
+    ],
+    "interval": 10
 }
