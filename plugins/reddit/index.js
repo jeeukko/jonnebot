@@ -16,7 +16,7 @@ module.exports = function(bot) {
 	});
 
 	this.add("event:message", function(msg, cb) {
-		uri.withinString(msg.arg.text, function(url) {
+		uri.withinString(msg.args.text, function(url) {
 			if (url) {
 				reddit("/api/submit").post({
 					api_type: "json",

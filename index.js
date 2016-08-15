@@ -2,37 +2,35 @@ var config = require("./config.json");
 var seneca = require("seneca")();
 var irc = require("irc");
 
-var bot = new irc.Client(config.server, config.botname, {
+var client = new irc.Client(config.server, config.botname, {
 	channels: [config.channel],
 	userName: config.username,
 	realName: config.realname,
-	debug: true
+	debug: config.debug
 });
 
-var botti = {
-	nick: bot.opt.nick,
+var bot = {
+	nick: client.opt.nick,
 
 	config: config,
 
 	send: function() {
-		bot.send.apply(bot, Array.prototype.slice.call(arguments, 0));
-	},
-	join: function(channel) {
-		bot.join(channel);
-	},
-	part: function(channel, msg) {
-		bot.part(channel, msg, null);
+		client.send.apply(client, Array.prototype.slice.call(arguments, 0));
 	},
 	say: function(target, msg) {
-		bot.say(target, msg);
+		client.say(target, msg);
 	},
 	action: function(target, msg) {
-		bot.action(target, msg);
+		client.action(target, msg);
 	}
 }
 
+seneca.add("irc:*", function(msg, cb) {
+	cb();
+});
+
 config.plugins.forEach(function(item) {
-	seneca.use(require("./plugins/" + item + "/index.js"), botti);
+	seneca.use(require("./plugins/" + item + "/index.js"), bot);
 });
 
 seneca.ready(function(err) {
@@ -41,40 +39,40 @@ seneca.ready(function(err) {
 		process.exit(1);
 	}
 
-	bot.addListener("error", function(message) {
+	client.addListener("error", function(message) {
 		console.log(message);
 	});
-	bot.addListener("names", function(channel, nicks) {
-		seneca.act({event: "names", arg: {channel: channel, nicks: nicks}});
+	client.addListener("names", function(channel, nicks) {
+		seneca.act({irc: "names", args: {channel: channel, nicks: nicks}});
 	});
-	bot.addListener("join", function(channel, nick) {
-		seneca.act({event: "join", arg: {channel: channel, nick: nick}});
+	client.addListener("join", function(channel, nick) {
+		seneca.act({irc: "join", args: {channel: channel, nick: nick}});
 	});
-	bot.addListener("part", function(channel, nick, reason) {
-		seneca.act({event: "part", arg: {channel: channel, nick: nick, reason: reason}});
+	client.addListener("part", function(channel, nick, reason) {
+		seneca.act({irc: "part", args: {channel: channel, nick: nick, reason: reason}});
 	});
-	bot.addListener("quit", function(nick, reason, channels) {
-		seneca.act({event: "quit", arg: {nick: nick, reason: reason, channels: channels}});
+	client.addListener("quit", function(nick, reason, channels) {
+		seneca.act({irc: "quit", args: {nick: nick, reason: reason, channels: channels}});
 	});
-	bot.addListener("kick", function(channel, nick, by, reason) {
-		seneca.act({event: "kick", arg: {channel: channel, nick: nick, by: by, reason: reason}});
+	client.addListener("kick", function(channel, nick, by, reason) {
+		seneca.act({irc: "kick", args: {channel: channel, nick: nick, by: by, reason: reason}});
 	});
-	bot.addListener("message", function(nick, to, text) {
-		seneca.act({event: "message", arg: {nick: nick, to: to, text: text}});
+	client.addListener("message", function(nick, to, text) {
+		seneca.act({irc: "message", args: {nick: nick, to: to, text: text}});
 	});
-	bot.addListener("pm", function(nick, text) {
-		seneca.act({event: "pm", arg: {nick: nick, text: text}});
+	client.addListener("pm", function(nick, text) {
+		seneca.act({irc: "pm", args: {nick: nick, text: text}});
 	});
-	bot.addListener("nick", function(oldnick, newnick, channels) {
-		seneca.act({event: "nick", arg: {oldnick: oldnick, newnick: newnick, channels: channels}});
+	client.addListener("nick", function(oldnick, newnick, channels) {
+		seneca.act({irc: "nick", args: {oldnick: oldnick, newnick: newnick, channels: channels}});
 	});
-	bot.addListener("+mode", function(channel, by, mode, argument) {
-		seneca.act({event: "+mode", arg: {channel: channel, by: by, mode: mode, argument: argument}});
+	client.addListener("+mode", function(channel, by, mode, argument) {
+		seneca.act({irc: "+mode", args: {channel: channel, by: by, mode: mode, argument: argument}});
 	});
-	bot.addListener("-mode", function(channel, by, mode, argument) {
-		seneca.act({event: "-mode", arg: {channel: channel, by: by, mode: mode, argument: argument}});
+	client.addListener("-mode", function(channel, by, mode, argument) {
+		seneca.act({irc: "-mode", args: {channel: channel, by: by, mode: mode, argument: argument}});
 	});
-	bot.addListener("action", function(from, to, text) {
-		seneca.act({event: "action", arg: {from: from, to: to, text: text}});
+	client.addListener("action", function(from, to, text) {
+		seneca.act({irc: "action", args: {from: from, to: to, text: text}});
 	});
 });
