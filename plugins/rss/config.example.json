@@ -2,10 +2,12 @@
 	"urls": [
 		{
 			"url": "http://www.hs.fi/rss/?osastot=kotimaa",
+			"prefix": "Kotimaa",
 			"lastPostTime": 0
 		},
 		{
 			"url": "http://www.hs.fi/rss/?osastot=ulkomaat",
+			"prefix": "Ulkomaat",
 			"lastPostTime": 0
 		}
 	],

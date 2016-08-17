@@ -1,7 +1,8 @@
 {
 	"urls": [
 		{
-			"url": "http://example.com/feed.xml",
+			"url": "",
+			"prefix": "",
 			"lastPostTime": 0
 		}
 	],

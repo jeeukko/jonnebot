@@ -12,8 +12,11 @@ module.exports = function(bot) {
 					} else {
 						parsed.feed.entries.forEach(function(entry) {
 							if (new Date(entry.pubDate).getTime() / 1000 > config.urls[index].lastPostTime) {
-								bot.say(bot.config.channel, "New message: " + entry.title + " | " + entry.link);
-
+								if (feed.prefix) {
+									bot.say(bot.config.channel, feed.prefix + " | " + entry.title + " | " + entry.link);
+								} else {
+									bot.say(bot.config.channel, "RSS | " + entry.title + " | " + entry.link);
+								}
 								config.urls[index].lastPostTime = new Date(entry.pubDate).getTime() / 1000;
 								fs.writeFile("./plugins/rss/config.json", JSON.stringify(config, null, 4), function(err) {
 									console.log("ERROR: " + err);
