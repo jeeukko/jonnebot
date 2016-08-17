@@ -3,7 +3,7 @@
 	"username": "JonneBot",
 	"realname": "JonneBot",
 	"server": "irc.quakenet.org",
-	"channel": "#testing",
+	"channel": "#JonneBot",
 	"plugins": ["chat", "linkcheck", "rss"],
 	"debug": false
 }
